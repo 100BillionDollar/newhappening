@@ -54,7 +54,7 @@ export default function Home() {
         <div className="container">
           <div className="events-header d-flex justify-content-between align-items-center mb-3">
             <h2 className="page_heading text-white">Upcoming Events</h2>
-            <Link href="/events" className="text-white text-decoration-none view_all_btn">View All</Link>
+            <Link href="#" className="text-white text-decoration-none view_all_btn">View All</Link>
           </div>
 
           <swiper-container 
