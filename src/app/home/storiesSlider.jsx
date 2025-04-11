@@ -18,6 +18,7 @@ import {
   faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
 
+
 export default function EnhancedStoriesSlider() {
   const [stories, setStories] = useState([
     { 
@@ -25,8 +26,8 @@ export default function EnhancedStoriesSlider() {
       name: "James J. Smith", 
       time: "10 mins ago", 
       media: [
-        "/assets/images/stories_img1.jpg",
-        "/assets/images/event_img1.jpg"
+        "/assets/images/stories_img1.png",
+        "/assets/images/stories_img1.png"
       ],
       reactions: { likes: 12, hearts: 5, laughs: 3 },
       comments: [
@@ -39,9 +40,9 @@ export default function EnhancedStoriesSlider() {
       name: "Amanda Jordan", 
       time: "20 mins ago", 
       media: [
-        "/assets/images/event_img1.jpg", 
-        "/assets/images/stories_img2.jpg",
-        "/assets/images/stories_img1.jpg"
+        "/assets/images/stories_img1.png", 
+        "/assets/images/stories_img1.png",
+        "/assets/images/stories_img1.png"
       ],
       reactions: { likes: 24, hearts: 18, laughs: 7 },
       comments: [
@@ -53,8 +54,8 @@ export default function EnhancedStoriesSlider() {
       name: "Kevin J. Nate", 
       time: "30 mins ago", 
       media: [
-        "/assets/images/stories_img2.jpg",
-        "/assets/images/event_img1.jpg"
+        "/assets/images/stories_img1.png",
+        "/assets/images/stories_img1.png"
       ],
       reactions: { likes: 8, hearts: 2, laughs: 0 },
       comments: []
@@ -64,9 +65,9 @@ export default function EnhancedStoriesSlider() {
       name: "James J. Smith", 
       time: "10 mins ago", 
       media: [
-        "/assets/images/event_img1.jpg",
-        "/assets/images/stories_img1.jpg",
-        "/assets/images/stories_img2.jpg"
+        "/assets/images/stories_img1.png",
+        "/assets/images/stories_img1.png",
+        "/assets/images/stories_img1.png"
       ],
       reactions: { likes: 17, hearts: 9, laughs: 5 },
       comments: [
@@ -285,26 +286,37 @@ export default function EnhancedStoriesSlider() {
   };
 
   return (
-    <div className="mb-3">
-      <Swiper modules={[Navigation]} navigation spaceBetween={8} slidesPerView={1} className="stories-slider">
+    <>
+    <section className="stories_slider_section">
+    <div className="container mb-3 p-0">
+      <div className="d-flex justify-content-between align-items-center mb-4 ps-4 pr-4">
+          <h2 className="page_heading">Community Highlights</h2>
+         
+        </div>
+      <Swiper modules={[Navigation]} navigation   effect="coverflow"
+  grabCursor={true}
+  centeredSlides={true}
+
+  initialSlide={1}
+  coverflowEffect={{
+    rotate: 0,
+    stretch: 0,
+    depth: 300,
+    modifier: 1,
+    slideShadows:false
+  }}
+   breakpoints={{
+            320: { slidesPerView: 1.1, spaceBetween: 30 },
+            768: { slidesPerView: 1.5, spaceBetween: 30 },
+            1024: { slidesPerView: 2, spaceBetween: 30},
+          }}
+className="stories-slider">
      
         {stories.map((story, index) => (
           <SwiperSlide key={story.id}>
             <div className="story-item" onClick={() => handleViewStory(index)}>
-              <Image src={story.media[0]} alt="Story" width={134} height={202} className="story-image" />
-              {story.media.length > 1 && (
-                <div className="multi-image-badge">+{story.media.length}</div>
-              )}
-              <div className="story-username">{story.name}</div>
-              <div className="story-time">{story.time}</div>
-              <div className="story-stats">
-                <span className="story-comments">
-                  <FontAwesomeIcon icon={faComment} /> {story.comments.length}
-                </span>
-                <span className="story-reactions">
-                  <FontAwesomeIcon icon={faThumbsUp} /> {story.reactions.likes + story.reactions.hearts + story.reactions.laughs}
-                </span>
-              </div>
+              <Image src={story.media[0]} alt="Story" width={336} height={361} className="story-image" />
+
             </div>
           </SwiperSlide>
         ))}
@@ -331,77 +343,14 @@ export default function EnhancedStoriesSlider() {
                 {renderMediaIndicators()}
               </>
             )}
-            
-            <div className="story-info">
-              <h6>{selectedStory.name}</h6>
-              <p>{selectedStory.time}</p>
-            </div>
+          
             <div className="story-progress">
               <div className="progress-bar" style={{ width: `${progress}%` }}></div>
             </div>
             
-            <div className="story-actions" onClick={(e) => e.stopPropagation()}>
-              <div className="reaction-buttons">
-                <button 
-                  className={`reaction-btn ${userReaction === 'likes' ? 'active' : ''}`} 
-                  onClick={(e) => handleReaction('likes', e)}
-                >
-                  <FontAwesomeIcon icon={faThumbsUp} /> {selectedStory.reactions.likes}
-                </button>
-                <button 
-                  className={`reaction-btn ${userReaction === 'hearts' ? 'active' : ''}`}
-                  onClick={(e) => handleReaction('hearts', e)}
-                >
-                  <FontAwesomeIcon icon={faHeart} /> {selectedStory.reactions.hearts}
-                </button>
-                <button 
-                  className={`reaction-btn ${userReaction === 'laughs' ? 'active' : ''}`}
-                  onClick={(e) => handleReaction('laughs', e)}
-                >
-                  <FontAwesomeIcon icon={faLaugh} /> {selectedStory.reactions.laughs}
-                </button>
-                <button className="comment-btn" onClick={toggleComments}>
-                  <FontAwesomeIcon icon={faComment} /> {selectedStory.comments.length}
-                </button>
-              </div>
-            </div>
             
-            {showComments && (
-              <div className="comments-panel" onClick={(e) => e.stopPropagation()}>
-                <div className="comments-header">
-                  <h6>Comments ({selectedStory.comments.length})</h6>
-                  <button className="close-btn" onClick={toggleComments}>
-                    <FontAwesomeIcon icon={faTimes} />
-                  </button>
-                </div>
-                
-                <div className="comments-list">
-                  {selectedStory.comments.length > 0 ? (
-                    selectedStory.comments.map(comment => (
-                      <div key={comment.id} className="comment-item">
-                        <div className="comment-user">{comment.user}</div>
-                        <div className="comment-text">{comment.text}</div>
-                        <div className="comment-time">{comment.time}</div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="no-comments">No comments yet. Be the first to comment!</div>
-                  )}
-                </div>
-                
-                <form className="comment-form" onSubmit={handleCommentSubmit}>
-                  <input
-                    type="text"
-                    placeholder="Write a comment..."
-                    value={commentText}
-                    onChange={(e) => setCommentText(e.target.value)}
-                  />
-                  <button type="submit">
-                    <FontAwesomeIcon icon={faPaperPlane} />
-                  </button>
-                </form>
-              </div>
-            )}
+            
+           
           </div>
           
           <button className="close-modal" onClick={handleCloseStory}>✕</button>
@@ -460,9 +409,9 @@ export default function EnhancedStoriesSlider() {
         }
         .story-content { 
           position: relative; 
-          width: 80%; 
-          max-width: 500px; 
-          height: 80vh; 
+              width: 90%;
+    max-width: 100%;
+    height: 500px;
           background: #000; 
           display: flex; 
           align-items: center; 
@@ -552,6 +501,7 @@ export default function EnhancedStoriesSlider() {
         .prev-btn {
           left: 15px;
         }
+          .story-item{margin:0 12px;}
         .next-btn {
           right: 15px;
         }
@@ -652,5 +602,7 @@ export default function EnhancedStoriesSlider() {
         }
       `}</style>
     </div>
+    </section>
+    </>
   );
 }

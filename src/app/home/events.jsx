@@ -53,14 +53,14 @@ export default function Home() {
       <section className="event_section">
         <div className="container">
           <div className="events-header d-flex justify-content-between align-items-center mb-3">
-            <h2 className="text-white m-0">Upcoming Events</h2>
-            <Link href="/events" className="text-white text-decoration-none">View All</Link>
+            <h2 className="page_heading text-white">Upcoming Events</h2>
+            <Link href="/events" className="text-white text-decoration-none view_all_btn">View All</Link>
           </div>
 
           <swiper-container 
             slides-per-view="auto" 
             space-between="15" 
-            navigation="true"
+            navigation="false"
             pagination="false"
             className="events-swiper"
           >
@@ -83,12 +83,12 @@ export default function Home() {
                     )}
                   </div>
                   <div className="card-body" style={{ backgroundColor: 'white' }}>
-                    <h5 className="card-title" style={{ color: '#6a0dad' }}>{event.title}</h5>
+                    <h5 className="card-title event_title">{event.title}</h5>
                     <p className="card-text mb-2">
                       {event.date} • {event.time}
                     </p>
                     <div className="d-flex align-items-center mb-3">
-                      <div className="me-3">
+                      <div className="me-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-geo-alt" viewBox="0 0 16 16">
                           <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
                           <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -109,7 +109,7 @@ export default function Home() {
                         </>
                       )}
                     </div>
-                    <Link href="#" className="global_btn">
+                    <Link href="#" className="join_now">
                       Join Now
                     </Link>
                   </div>

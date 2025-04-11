@@ -35,8 +35,8 @@ const FaqAccordion = () => {
   };
 
   return (
-    <div className="container my-5">
-      <h1 style={customStyles.heading}>FAQ's</h1>
+    <div className="container my-5 mt-0">
+      <h2 className="page_heading">FAQ's</h2>
       
       <div className="accordion" id="faqAccordion">
         {faqData.map((faq, index) => (

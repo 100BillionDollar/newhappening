@@ -3,6 +3,11 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Footerlogo from "/public/assets/images/footer_logo.png";
+import icon1 from "/public/assets/images/Instragram.svg";
+import icon2 from "/public/assets/images/Linkdin.svg";
+import icon3 from "/public/assets/images/Facebook.svg";
+import icon4 from "/public/assets/images/X.svg";
+import icon5 from "/public/assets/images/youtube.svg";
 
 const Footer = () => {
   return (
@@ -49,19 +54,24 @@ const Footer = () => {
           <div className="d-flex gap-3 mt-2">
             {/* Simple styled boxes instead of icons */}
             <a href="https://instagram.com" className="text-white text-decoration-none" aria-label="Instagram">
-              <div style={{ width: '25px', height: '25px', backgroundColor: 'white', color: '#4a1942', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '4px' }}>IG</div>
+              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon1} width={20} height={20}/>
+              </div>
             </a>
             <a href="https://linkedin.com" className="text-white text-decoration-none" aria-label="LinkedIn">
-              <div style={{ width: '25px', height: '25px', backgroundColor: 'white', color: '#4a1942', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '4px' }}>LI</div>
+              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon2} width={20} height={20}/>
+              </div>
             </a>
             <a href="https://facebook.com" className="text-white text-decoration-none" aria-label="Facebook">
-              <div style={{ width: '25px', height: '25px', backgroundColor: 'white', color: '#4a1942', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '4px' }}>FB</div>
+              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon3} width={20} height={20}/>
+              </div>
             </a>
             <a href="https://twitter.com" className="text-white text-decoration-none" aria-label="X Twitter">
-              <div style={{ width: '25px', height: '25px', backgroundColor: 'white', color: '#4a1942', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '4px' }}>X</div>
+              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon4} width={20} height={20}/>
+              </div>
             </a>
             <a href="https://youtube.com" className="text-white text-decoration-none" aria-label="YouTube">
-              <div style={{ width: '25px', height: '25px', backgroundColor: 'white', color: '#4a1942', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '4px' }}>YT</div>
+              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon5} width={20} height={20}/>
+              </div>
             </a>
           </div>
         </div>

@@ -1,17 +1,17 @@
-
 "use client";
 
 // components/Navbar.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Logo from "/public/assets/images/logo.svg";
 import Search from "/public/assets/images/search_icon.svg";
 import User from "/public/assets/images/user_icon.svg";
-
 import Link from 'next/link';
 
 const Navbar = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchBoxRef = useRef(null);
   
   // Toggle the offcanvas menu
   const toggleOffcanvas = () => {
@@ -23,9 +23,19 @@ const Navbar = () => {
     setIsOffcanvasOpen(false);
   };
 
+  // Toggle search box
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
+  // Close search box
+  const closeSearch = () => {
+    setIsSearchOpen(false);
+  };
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white py-2">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white py-3">
         <div className="container">
           {/* Hamburger Menu */}
           <button
@@ -42,7 +52,7 @@ const Navbar = () => {
             <div className="d-flex align-items-center">
               <div className="logo_box">
                 <Image src={Logo} width={69} height={47}/>
-            </div>
+              </div>
             </div>
           </Link>
           
@@ -63,15 +73,50 @@ const Navbar = () => {
           
           {/* Right-aligned icons */}
           <div className="d-flex align-items-center">
-            <button className="btn btn-link">
-            <Image src={Search} width={26} height={29}/>
+            <button className="btn btn-link" onClick={toggleSearch}>
+              <Image src={Search} width={26} height={29}/>
             </button>
             <button className="btn btn-link text-dark">
-            <Image src={User} width={26} height={29}/>
+              <Image src={User} width={26} height={29}/>
             </button>
           </div>
         </div>
       </nav>
+
+      {/* Search Box Toggle with smooth animation */}
+      <div 
+        ref={searchBoxRef}
+        className="search-box-container"
+        style={{
+          backgroundColor: '#67132F',
+          overflow: 'hidden',
+          maxHeight: isSearchOpen ? '70px' : '0',
+          opacity: isSearchOpen ? 1 : 0,
+          transition: 'all 0.3s ease-in-out',
+          borderBottom: '1px solid #dee2e6',
+          borderBottomColor: isSearchOpen ? '#dee2e6' : 'transparent'
+        }}
+      >
+        <div className="container py-3">
+          <div className="d-flex align-items-center">
+            <div className="flex-grow-1">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Search..." 
+                aria-label="Search"
+                style={{ borderColor: '#5a2152' }}
+              />
+            </div>
+            <button 
+              type="button" 
+              className="btn-close ms-2 text-white" 
+              onClick={closeSearch}
+              aria-label="Close search"
+            ></button>
+          </div>
+        </div>
+      </div>
 
       {/* Custom Sliding Menu Implementation */}
       <div 
@@ -90,7 +135,7 @@ const Navbar = () => {
           overflowY: 'auto'
         }}
       >
-        <div style={{ backgroundColor: '#5a2152', color: 'white', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ backgroundColor: '#67132F', color: 'white', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h5 style={{ margin: 0 }}>Menu</h5>
           <button 
             type="button" 
@@ -106,7 +151,7 @@ const Navbar = () => {
               <Link 
                 href="/" 
                 className="nav-link px-3" 
-                style={{ color: '#5a2152', fontWeight: '500' }}
+                style={{ color: '#67132F', fontWeight: '500' }}
                 onClick={closeOffcanvas}
               >
                 Home
@@ -116,7 +161,7 @@ const Navbar = () => {
               <Link 
                 href="/about" 
                 className="nav-link px-3" 
-                style={{ color: '#5a2152', fontWeight: '500' }}
+                style={{ color: '#67132F', fontWeight: '400' }}
                 onClick={closeOffcanvas}
               >
                 About Us
@@ -126,7 +171,7 @@ const Navbar = () => {
               <Link 
                 href="/services" 
                 className="nav-link px-3" 
-                style={{ color: '#5a2152', fontWeight: '500' }}
+                style={{ color: '#67132F', fontWeight: '400' }}
                 onClick={closeOffcanvas}
               >
                 Our Services
@@ -136,7 +181,7 @@ const Navbar = () => {
               <Link 
                 href="/residences" 
                 className="nav-link px-3" 
-                style={{ color: '#5a2152', fontWeight: '500' }}
+                style={{ color: '#67132F', fontWeight: '400' }}
                 onClick={closeOffcanvas}
               >
                 Residences
@@ -146,7 +191,7 @@ const Navbar = () => {
               <Link 
                 href="/testimonials" 
                 className="nav-link px-3" 
-                style={{ color: '#5a2152', fontWeight: '500' }}
+                style={{ color: '#67132F', fontWeight: '400' }}
                 onClick={closeOffcanvas}
               >
                 Testimonials
@@ -156,7 +201,7 @@ const Navbar = () => {
               <Link 
                 href="/faq" 
                 className="nav-link px-3" 
-                style={{ color: '#5a2152', fontWeight: '500' }}
+                style={{ color: '#67132F', fontWeight: '400' }}
                 onClick={closeOffcanvas}
               >
                 FAQ
@@ -166,7 +211,7 @@ const Navbar = () => {
               <Link 
                 href="/contact" 
                 className="nav-link px-3" 
-                style={{ color: '#5a2152', fontWeight: '500' }}
+                style={{ color: '#67132F', fontWeight: '400' }}
                 onClick={closeOffcanvas}
               >
                 Contact Us
