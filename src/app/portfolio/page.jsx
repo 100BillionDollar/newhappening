@@ -1,21 +1,20 @@
 "use client"
-
 import Banner from "./banner";
-import Aboutus from "./aboutus";
+import Portfolio from "./portfolio";
 import { useEffect, useState ,useContext} from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 
 
-export default function About() {
-  useEffect(() => {
-    AOS.init({ once: true, duration: 800 });
-  }, []);
+export default function Home() {
+useEffect(() => {
+  AOS.init({ once: true, duration: 800 });
+}, []);
   return (<>
       <Banner/>
 
-    <Aboutus/>
+    <Portfolio/>
     </>
     
   );

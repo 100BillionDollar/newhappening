@@ -1,7 +1,6 @@
 "use client"
-
 import Banner from "./banner";
-import Aboutus from "./aboutus";
+import Service from "./service";
 import { useEffect, useState ,useContext} from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -9,13 +8,13 @@ import 'aos/dist/aos.css';
 
 
 export default function About() {
-  useEffect(() => {
-    AOS.init({ once: true, duration: 800 });
-  }, []);
+    useEffect(() => {
+      AOS.init({ once: true, duration: 800 });
+    }, []);
   return (<>
-      <Banner/>
+    <Banner/>
 
-    <Aboutus/>
+    <Service/>
     </>
     
   );

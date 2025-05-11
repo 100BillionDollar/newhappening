@@ -1,11 +1,21 @@
+"use client"
 import Banner from "./banner";
-import ContactForm from "./contactform";
+import Contactus from "./contactus";
+import { useEffect, useState ,useContext} from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-export default function Home() {
+
+
+
+export default function About() {
+  useEffect(() => {
+  AOS.init({ once: true, duration: 800 });
+  }, []);
   return (<>
-    <Banner/>
-    <ContactForm/>
-  
+      <Banner/>
+
+    <Contactus/>
     </>
     
   );

@@ -1,14 +1,13 @@
 // components/AboutBanner.js
 import Link from 'next/link';
 import Image from 'next/image';
-import Aboutbanner from "/public/assets/images/contact_banner.jpg";
+import Aboutbanner from "/public/assets/images/service_banner.jpg";
 import { useEffect, useState} from 'react';
-
 
 
 export default function AboutBanner() {
   const [position, setPosition] = useState(0);
-    
+      
   useEffect(() => {
     let animationFrame;
     let startTime = null;
@@ -39,14 +38,10 @@ export default function AboutBanner() {
        <Image className='img-fluid' src={Aboutbanner} width={1920} height={400}/> 
       <div className="container h-100 position-absolute caption_box">
         <div className="row h-100">
-          <div className="col-12 portfolio_heading d-flex flex-column justify-content-center"  data-aos="fade-up" data-aos-delay="200">
+          <div className="col-12 d-flex flex-column justify-content-center"  data-aos="fade-up" data-aos-delay="200">
             <h1 className="title_heading">
-             Connect With the<br></br>
-             Happening Ads<br>
-             </br>
-             Experts
+              Services
             </h1>
-            <p>We Know how to touch your<br></br> customers hearts</p>
           </div>
         </div>
       </div>

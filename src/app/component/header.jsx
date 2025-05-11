@@ -1,243 +1,228 @@
 "use client";
 
-// components/Navbar.jsx
-import React, { useEffect, useState, useRef } from 'react';
-import Image from 'next/image';
-import Logo from "/public/assets/images/logo.svg";
-import Search from "/public/assets/images/search_icon.svg";
-import User from "/public/assets/images/user_icon.svg";
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBehance, faFacebook, faInstagram, faLinkedin, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faClose, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
-const Navbar = () => {
-  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const searchBoxRef = useRef(null);
-  
-  // Toggle the offcanvas menu
-  const toggleOffcanvas = () => {
-    setIsOffcanvasOpen(!isOffcanvasOpen);
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+  const menuRef = useRef(null);
+  const pathname = usePathname(); // Get current pathname using Next.js hook
+
+  // Add scroll event listener to detect when header should become sticky
+  useEffect(() => {
+    const handleScroll = () => {
+      // Make the header sticky after scrolling 100px
+      if (window.scrollY > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Add click outside listener to close menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target) && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
+
+  // Function to close menu when a link is clicked
+  const handleLinkClick = () => {
+    setMenuOpen(false);
   };
 
-  // Close the offcanvas menu
-  const closeOffcanvas = () => {
-    setIsOffcanvasOpen(false);
-  };
-
-  // Toggle search box
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-  };
-
-  // Close search box
-  const closeSearch = () => {
-    setIsSearchOpen(false);
+  // Function to check if current path matches the link
+  const isActive = (path) => {
+    return pathname === path;
   };
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div className="container">
-          {/* Hamburger Menu */}
-          <button
-            className="navbar-toggler border-0"
-            type="button"
-            onClick={toggleOffcanvas}
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          
-          {/* Logo */}
-          <Link href="/" className="navbar-brand mx-auto mx-lg-0">
-            <div className="d-flex align-items-center">
-              <div className="logo_box">
-                <Image src={Logo} width={69} height={47}/>
-              </div>
-            </div>
-          </Link>
-          
-          {/* Regular navbar (visible on large screens) */}
-          <div className="collapse navbar-collapse" id="navbarContent">
-            <ul className="navbar-nav ms-auto me-3">
-              <li className="nav-item">
-                <Link href="/about" className="nav-link" style={{ color: '#5a2152' }}>About</Link>
+      <header className={`${isSticky ? 'sticky-header' : ''}`}>
+        <nav className={`navbar ${isSticky ? 'navbar-sticky' : ''}`}>
+          <div className="container d-flex justify-content-between align-items-center">
+            <Link href="/" className="navbar-brand fw-bold">
+              <Image 
+                src="/assets/images/logo.png" 
+                className="img-fluid" 
+                alt="Logo" 
+                width={220} 
+                height={50}
+              />
+            </Link>
+            <button
+              className="btn menu_icon border-0"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open Menu"
+            >
+              <Image 
+                src="/assets/images/humberger_menu.png" 
+                alt="menu" 
+                width={55} 
+                height={55} 
+              />
+            </button>
+          </div>
+        </nav>
+
+        {/* Overlay Slide Menu */}
+        <div className={`menu-overlay ${menuOpen ? 'show' : ''}`} ref={menuRef}>
+          {/* Left Sidebar */}
+          <div className="menu-sidebar">
+            <ul className="list-unstyled">
+              <li>
+                <Link 
+                  href="/about" 
+                  className={isActive('/about') ? 'active' : ''}
+                  onClick={handleLinkClick}
+                >
+                  About
+                </Link>
               </li>
-              <li className="nav-item">
-                <Link href="/services" className="nav-link" style={{ color: '#5a2152' }}>Services</Link>
+              <li>
+                <Link 
+                  href="/services" 
+                  className={isActive('/services') ? 'active' : ''}
+                  onClick={handleLinkClick}
+                >
+                  Services
+                </Link>
               </li>
-              <li className="nav-item">
-                <Link href="/contact" className="nav-link" style={{ color: '#5a2152' }}>Contact</Link>
+              <li>
+                <Link 
+                  href="/portfolio" 
+                  className={isActive('/portfolio') ? 'active' : ''}
+                  onClick={handleLinkClick}
+                >
+                  Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/career" 
+                  className={isActive('/career') ? 'active' : ''}
+                  onClick={handleLinkClick}
+                >
+                  Career
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/contactus" 
+                  className={isActive('/contactus') ? 'active' : ''}
+                  onClick={handleLinkClick}
+                >
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
+
+          {/* Right Content */}
+          <div className="menu-content position-relative">
           
-          {/* Right-aligned icons */}
-          <div className="d-flex align-items-center">
-            <button className="btn btn-link" onClick={toggleSearch}>
-              <Image src={Search} width={26} height={29}/>
-            </button>
-            <button className="btn btn-link text-dark">
-              <Image src={User} width={26} height={29}/>
-            </button>
-          </div>
-        </div>
-      </nav>
+            {/* Content Section */}
+            <div className="right_menu_cntr">
+              <div className="mb-3">
+                <Image className="img-fluid"
+                  src="/assets/images/logo.png" 
+                  alt="Ahmar" 
+                  width={200} 
+                  height={45} 
+                />
+              </div>
+              
+              <div className="d-flex align-items-start mb-2">
+                <p className="mb-0">
+                <span className="contact_icon"><FontAwesomeIcon icon={faLocationDot} /></span> K-20, 2nd Floor, Sector 18,<br />
+                  Noida-201301 (U.P)
+                </p>
+              </div>
+              
 
-      {/* Search Box Toggle with smooth animation */}
-      <div 
-        ref={searchBoxRef}
-        className="search-box-container"
-        style={{
-          backgroundColor: '#67132F',
-          overflow: 'hidden',
-          maxHeight: isSearchOpen ? '70px' : '0',
-          opacity: isSearchOpen ? 1 : 0,
-          transition: 'all 0.3s ease-in-out',
-          borderBottom: '1px solid #dee2e6',
-          borderBottomColor: isSearchOpen ? '#dee2e6' : 'transparent'
-        }}
-      >
-        <div className="container py-3">
-          <div className="d-flex align-items-center">
-            <div className="flex-grow-1">
-              <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Search..." 
-                aria-label="Search"
-                style={{ borderColor: '#5a2152' }}
-              />
+              <div className="pt-4">
+              <p className="text-warning fw-semibold my-3">We'd love to hear from you</p>
+              
+              <div className="d-flex align-items-center mb-2">
+                <p className="mb-0"><span className="contact_icon"><FontAwesomeIcon icon={faEnvelope} /></span> Info@happeningads.com</p>
+              </div>
+              
+              <div className="d-flex align-items-center mb-4">
+                <p className="mb-0"><span className="contact_icon"><FontAwesomeIcon icon={faPhone} /></span>+91 99994 53999</p>
+              </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="menu-social d-flex mt-5">
+                <a href="#" className="me-3"><FontAwesomeIcon icon={faInstagram} /></a>
+                <a href="#" className="me-3"><FontAwesomeIcon icon={faLinkedin} /></a>
+                <a href="#" className="me-3"><FontAwesomeIcon icon={faFacebook} /></a>
+                <a href="#" className="me-3"><FontAwesomeIcon icon={faXTwitter} /></a>
+                <a href="#" className="me-3"><FontAwesomeIcon icon={faYoutube} /></a>
+                <a href="#" className="me-3"><FontAwesomeIcon icon={faBehance} /></a>
+              </div>
             </div>
-            <button 
-              type="button" 
-              className="btn-close ms-2 text-white" 
-              onClick={closeSearch}
-              aria-label="Close search"
-            ></button>
+
+            <span className="pattern_logo"> <Image className="img-fluid" src="/assets/images/pattern_logo.png" alt="Ahmar" width={200} height={45} /></span>
           </div>
-        </div>
-      </div>
+            {/* Close button */}
+            <div className="text-end">
+              <button
+                className="btn fs-2 nav_close_btn"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close Menu"
+              >
+               <FontAwesomeIcon icon={faClose} />
+              </button>
+            </div>
 
-      {/* Custom Sliding Menu Implementation */}
-      <div 
-        className={`offcanvas-menu ${isOffcanvasOpen ? 'show' : ''}`}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '300px',
-          height: '100%',
-          backgroundColor: 'white',
-          boxShadow: '0 0 15px rgba(0,0,0,0.1)',
-          transform: isOffcanvasOpen ? 'translateX(0)' : 'translateX(-100%)',
-          transition: 'transform 0.3s ease-in-out',
-          zIndex: 1050,
-          overflowY: 'auto'
-        }}
-      >
-        <div style={{ backgroundColor: '#67132F', color: 'white', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h5 style={{ margin: 0 }}>Menu</h5>
-          <button 
-            type="button" 
-            className="btn-close"
-            onClick={closeOffcanvas}
-            aria-label="Close"
-            style={{ filter: 'invert(1)' }}
-          ></button>
         </div>
-        <div>
-          <ul className="navbar-nav">
-            <li className="nav-item py-2 border-bottom">
-              <Link 
-                href="/" 
-                className="nav-link px-3" 
-                style={{ color: '#67132F', fontWeight: '500' }}
-                onClick={closeOffcanvas}
-              >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item py-2 border-bottom">
-              <Link 
-                href="/about" 
-                className="nav-link px-3" 
-                style={{ color: '#67132F', fontWeight: '400' }}
-                onClick={closeOffcanvas}
-              >
-                About Us
-              </Link>
-            </li>
-            <li className="nav-item py-2 border-bottom">
-              <Link 
-                href="/services" 
-                className="nav-link px-3" 
-                style={{ color: '#67132F', fontWeight: '400' }}
-                onClick={closeOffcanvas}
-              >
-                Our Services
-              </Link>
-            </li>
-            <li className="nav-item py-2 border-bottom">
-              <Link 
-                href="/residences" 
-                className="nav-link px-3" 
-                style={{ color: '#67132F', fontWeight: '400' }}
-                onClick={closeOffcanvas}
-              >
-                Residences
-              </Link>
-            </li>
-            <li className="nav-item py-2 border-bottom">
-              <Link 
-                href="/testimonials" 
-                className="nav-link px-3" 
-                style={{ color: '#67132F', fontWeight: '400' }}
-                onClick={closeOffcanvas}
-              >
-                Testimonials
-              </Link>
-            </li>
-            <li className="nav-item py-2 border-bottom">
-              <Link 
-                href="/faq" 
-                className="nav-link px-3" 
-                style={{ color: '#67132F', fontWeight: '400' }}
-                onClick={closeOffcanvas}
-              >
-                FAQ
-              </Link>
-            </li>
-            <li className="nav-item py-2">
-              <Link 
-                href="/contact" 
-                className="nav-link px-3" 
-                style={{ color: '#67132F', fontWeight: '400' }}
-                onClick={closeOffcanvas}
-              >
-                Contact Us
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
+      </header>
 
-      {/* Overlay to close menu when clicking outside */}
-      {isOffcanvasOpen && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 1040
-          }}
-          onClick={closeOffcanvas}
-        />
-      )}
+      {/* Add CSS for sticky header */}
+      <style jsx>{`
+        .sticky-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 1000;
+          background-color: white;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease-in-out;
+          padding:3px 0;
+        }
+        
+        .navbar-sticky {
+          padding:0;
+        }
+      `}</style>
     </>
   );
-};
-
-export default Navbar;
+}

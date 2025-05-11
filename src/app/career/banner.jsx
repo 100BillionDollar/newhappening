@@ -1,39 +1,39 @@
 // components/AboutBanner.js
 import Link from 'next/link';
 import Image from 'next/image';
-import Aboutbanner from "/public/assets/images/contact_banner.jpg";
+import Aboutbanner from "/public/assets/images/career_banner.jpg";
 import { useEffect, useState} from 'react';
 
 
 
 export default function AboutBanner() {
-  const [position, setPosition] = useState(0);
+   const [position, setPosition] = useState(0);
     
-  useEffect(() => {
-    let animationFrame;
-    let startTime = null;
-    const duration = 2000; // 2 seconds for full animation cycle
-    const maxTranslation = 10; // Maximum translation in pixels
-    
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
+    useEffect(() => {
+      let animationFrame;
+      let startTime = null;
+      const duration = 2000; // 2 seconds for full animation cycle
+      const maxTranslation = 10; // Maximum translation in pixels
       
-      // Calculate position using sine wave for smooth, continuous motion
-      // This creates a smooth up and down animation that loops seamlessly
-      const progress = (elapsed % duration) / duration;
-      const newPosition = Math.sin(progress * Math.PI * 2) * maxTranslation;
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        
+        // Calculate position using sine wave for smooth, continuous motion
+        // This creates a smooth up and down animation that loops seamlessly
+        const progress = (elapsed % duration) / duration;
+        const newPosition = Math.sin(progress * Math.PI * 2) * maxTranslation;
+        
+        setPosition(newPosition);
+        animationFrame = requestAnimationFrame(animate);
+      };
       
-      setPosition(newPosition);
       animationFrame = requestAnimationFrame(animate);
-    };
-    
-    animationFrame = requestAnimationFrame(animate);
-    
-    return () => {
-      cancelAnimationFrame(animationFrame);
-    };
-  }, []);
+      
+      return () => {
+        cancelAnimationFrame(animationFrame);
+      };
+    }, []);
   return (
     <div className="banner-wrapper position-relative text-white">
        <Image className='img-fluid' src={Aboutbanner} width={1920} height={400}/> 
@@ -41,16 +41,16 @@ export default function AboutBanner() {
         <div className="row h-100">
           <div className="col-12 portfolio_heading d-flex flex-column justify-content-center"  data-aos="fade-up" data-aos-delay="200">
             <h1 className="title_heading">
-             Connect With the<br></br>
-             Happening Ads<br>
+            Join Our Dynamic<br></br>
+             Team at<br>
              </br>
-             Experts
+             Happening Ads
             </h1>
-            <p>We Know how to touch your<br></br> customers hearts</p>
           </div>
         </div>
       </div>
 
+      {/* Scroll Down Indicator */}
       <div className="scroll-indicator position-absolute start-50 translate-middle-x" style={{ bottom: '60px' }}>
       <div 
         className="text-center text-white transition-all duration-300"
@@ -76,6 +76,7 @@ export default function AboutBanner() {
         </a>
       </div>
     </div>
+
 
       {/* Contact Button */}
       <div className="position-absolute" style={{ bottom: '20px', right: '20px' }}>

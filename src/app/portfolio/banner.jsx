@@ -1,39 +1,38 @@
 // components/AboutBanner.js
 import Link from 'next/link';
 import Image from 'next/image';
-import Aboutbanner from "/public/assets/images/contact_banner.jpg";
+import Aboutbanner from "/public/assets/images/service_banner.jpg";
 import { useEffect, useState} from 'react';
 
 
-
 export default function AboutBanner() {
-  const [position, setPosition] = useState(0);
-    
-  useEffect(() => {
-    let animationFrame;
-    let startTime = null;
-    const duration = 2000; // 2 seconds for full animation cycle
-    const maxTranslation = 10; // Maximum translation in pixels
-    
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
+   const [position, setPosition] = useState(0);
       
-      // Calculate position using sine wave for smooth, continuous motion
-      // This creates a smooth up and down animation that loops seamlessly
-      const progress = (elapsed % duration) / duration;
-      const newPosition = Math.sin(progress * Math.PI * 2) * maxTranslation;
+    useEffect(() => {
+      let animationFrame;
+      let startTime = null;
+      const duration = 2000; // 2 seconds for full animation cycle
+      const maxTranslation = 10; // Maximum translation in pixels
       
-      setPosition(newPosition);
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        
+        // Calculate position using sine wave for smooth, continuous motion
+        // This creates a smooth up and down animation that loops seamlessly
+        const progress = (elapsed % duration) / duration;
+        const newPosition = Math.sin(progress * Math.PI * 2) * maxTranslation;
+        
+        setPosition(newPosition);
+        animationFrame = requestAnimationFrame(animate);
+      };
+      
       animationFrame = requestAnimationFrame(animate);
-    };
-    
-    animationFrame = requestAnimationFrame(animate);
-    
-    return () => {
-      cancelAnimationFrame(animationFrame);
-    };
-  }, []);
+      
+      return () => {
+        cancelAnimationFrame(animationFrame);
+      };
+    }, []);
   return (
     <div className="banner-wrapper position-relative text-white">
        <Image className='img-fluid' src={Aboutbanner} width={1920} height={400}/> 
@@ -41,12 +40,9 @@ export default function AboutBanner() {
         <div className="row h-100">
           <div className="col-12 portfolio_heading d-flex flex-column justify-content-center"  data-aos="fade-up" data-aos-delay="200">
             <h1 className="title_heading">
-             Connect With the<br></br>
-             Happening Ads<br>
-             </br>
-             Experts
+             Portfolio
             </h1>
-            <p>We Know how to touch your<br></br> customers hearts</p>
+            <p>Design is so simple and relevant <br></br> Works. That's why it's so complicated</p>
           </div>
         </div>
       </div>

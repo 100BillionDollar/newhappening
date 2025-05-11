@@ -2,79 +2,69 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Footerlogo from "/public/assets/images/footer_logo.png";
-import icon1 from "/public/assets/images/Instragram.svg";
-import icon2 from "/public/assets/images/Linkdin.svg";
-import icon3 from "/public/assets/images/Facebook.svg";
-import icon4 from "/public/assets/images/X.svg";
-import icon5 from "/public/assets/images/youtube.svg";
+import logo from '/public/assets/images/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBehance, faFacebook, faInstagram, faLinkedin, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
     <footer>
       <div className="container">
-        {/* Logo Section */}
-        <div className="d-flex justify-content-start mb-4">
-          <div className="d-flex flex-column align-items-start">
-            <Image src={Footerlogo} width={154} height={99}/>
-          </div>
-        </div>
-        
+      
         {/* Links Section */}
         <div className="row">
-          <div className="col-md-6 col-6 mb-4 mb-md-0">
+        <div className="col-md-4 col-6 mb-4 mb-md-0">
+
+        <div className="footer_logo">
+    <Image src={logo} alt="Logo" width={180} height={32} />
+            <p className="text-start mt-4">Lorem ipsum dolor sit amet, Magna vero consectetur et. Dolor volum et iaculis ut facilisi, est ollamcorper. Dolores primumque ius suspendere ut.  Dolor volum et iaculis ut facilisi, est ollamcorper. Dolores primumque ius suspendere ut.  Dolor volum et iaculis ut facilisi, est ollamcorper. </p> 
+          </div>
+        </div>
+          <div className="col-md-3 col-6 mb-4 mb-md-0 pd_left">
             <h5 className="footer_headinmg mb-3">Quick Links</h5>
             <ul className="list-unstyled">
-              <li className="mb-2"><Link href="/about-microsite" className="text-white text-decoration-none">About Microsite</Link></li>
-              <li className="mb-2"><Link href="/resources-tips" className="text-white text-decoration-none">Resource & Tips</Link></li>
-              <li className="mb-2"><Link href="/events-webminars" className="text-white text-decoration-none">Events & Webminars</Link></li>
+              <li className="mb-2"><Link href="#" className="text-decoration-none">About</Link></li>
+              <li className="mb-2"><Link href="#" className="text-decoration-none">Services</Link></li>
+              <li className="mb-2"><Link href="#" className="text-decoration-none">
+              Portfolio</Link></li>
+              <li className="mb-2"><Link href="#" className="text-decoration-none">
+              Career</Link></li>
+              <li className="mb-2"><Link href="#" className="text-decoration-none">
+              Contact</Link></li>
             </ul>
           </div>
           
-          <div className="col-md-6 col-6">
+      
+          <div className="col-md-3 col-6">
             <h5 className="footer_headinmg mb-3">Get in Touch</h5>
             <ul className="list-unstyled">
-              <li className="mb-2"><Link href="/contact" className="text-white text-decoration-none">Write to us</Link></li>
-              <li className="mb-2"><a href="tel:+91989XX989XX" className="text-white text-decoration-none">+91 989XX-989XX</a></li>
-              <li className="mb-2"><a href="mailto:Help@antara.com" className="text-white text-decoration-none">Help@antara.com</a></li>
+            
+              <li className="mb-2"><a href="tel:+919999453999" className="text-decoration-none">+91 9999453999</a></li>
+              <li className="mb-2"><a href="mailto:Info@happeningads.com" className="text-decoration-none">Info@happeningads.com</a></li>
+              <li className="mb-2"><a href="#" className="text-decoration-none">K-20, Sector 18, Noida-201301 (U.P)
+              </a></li>
             </ul>
             
-            <div className="mt-4">
-              <ul className="list-unstyled">
-                <li className="mb-2"><Link href="/terms-conditions" className="text-white text-decoration-none">Terms and Conditions</Link></li>
-                <li className="mb-2"><Link href="/privacy-policy" className="text-white text-decoration-none">Privacy Policy</Link></li>
-              </ul>
+       
+          </div>
+
+            <div className="col-md-2 col-6">
+          <div className="social_box">
+            <h5 className="footer_headinmg mb-3">Follow us on</h5>
+
+          <div className="d-flex social_icon gap-3 mt-2">
+            <a href="#"><FontAwesomeIcon icon={faInstagram} /></a>
+            <a href="#"><FontAwesomeIcon icon={faLinkedin} /></a>
+            <a href="#"><FontAwesomeIcon icon={faFacebook} /></a>
+            <a href="#"><FontAwesomeIcon icon={faXTwitter} /></a>
+            <a href="#"><FontAwesomeIcon icon={faYoutube} /></a>
+            <a href="#"><FontAwesomeIcon icon={faBehance} /></a>
             </div>
           </div>
         </div>
-        
-        {/* Social Media Section */}
-        <div className="mt-4">
-          <h5 className="footer_headinmg mb-3">Follow us on</h5>
-          <div className="d-flex gap-3 mt-2">
-            {/* Simple styled boxes instead of icons */}
-            <a href="https://instagram.com" className="text-white text-decoration-none" aria-label="Instagram">
-              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon1} width={20} height={20}/>
-              </div>
-            </a>
-            <a href="https://linkedin.com" className="text-white text-decoration-none" aria-label="LinkedIn">
-              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon2} width={20} height={20}/>
-              </div>
-            </a>
-            <a href="https://facebook.com" className="text-white text-decoration-none" aria-label="Facebook">
-              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon3} width={20} height={20}/>
-              </div>
-            </a>
-            <a href="https://twitter.com" className="text-white text-decoration-none" aria-label="X Twitter">
-              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon4} width={20} height={20}/>
-              </div>
-            </a>
-            <a href="https://youtube.com" className="text-white text-decoration-none" aria-label="YouTube">
-              <div style={{ width: '20px', height: '20px',  display: 'flex', justifyContent: 'center', alignItems: 'center', }}>            <Image src={icon5} width={20} height={20}/>
-              </div>
-            </a>
-          </div>
         </div>
+        
+      
       </div>
     </footer>
   );
