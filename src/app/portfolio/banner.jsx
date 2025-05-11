@@ -5,7 +5,7 @@ import Aboutbanner from "/public/assets/images/service_banner.jpg";
 import { useEffect, useState} from 'react';
 
 
-export default function AboutBanner() {
+export default function PortfolioBanner() {
    const [position, setPosition] = useState(0);
       
     useEffect(() => {
