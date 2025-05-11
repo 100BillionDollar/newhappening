@@ -7,13 +7,13 @@ import 'aos/dist/aos.css';
 
 
 
-export default function Home() {
+export default function PortfolioAds() {
 useEffect(() => {
   AOS.init({ once: true, duration: 800 });
 }, []);
   return (<>
-      <Banner/>
-      <Portfolio/>
+    <Banner/>
+    <Portfolio/>
     </>
     
   );

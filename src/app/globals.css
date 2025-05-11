@@ -583,7 +583,9 @@ button.nav-link.active {
   margin-bottom: 15px;
   letter-spacing: 0.5px;
 }
-
+.pd_left {
+    padding-left: 100px;
+}
 .portfolio_heading .title_heading {
   border-bottom: 3px solid var(--secondary-color);
   display: inline-block;

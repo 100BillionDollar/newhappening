@@ -116,8 +116,8 @@ export default function Navbar() {
               </li>
               <li>
                 <Link 
-                  href="/portfolio" 
-                  className={isActive('/portfolio') ? 'active' : ''}
+                  href="/portfolio-ads" 
+                  className={isActive('/portfolio-ads') ? 'active' : ''}
                   onClick={handleLinkClick}
                 >
                   Portfolio
